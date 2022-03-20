@@ -17,7 +17,9 @@ Use [vpnkit](https://github.com/moby/vpnkit). simple solution is [wsl-vpnkit](ht
 1. Download wsl-vpnkit
 ```pwsh
 # Powershell
-iwr "https://github.com/sakai135/wsl-vpnkit/releases/latest" -OutFile "$HOME\wsl-vpnkit.tar.gz"
+$githubLatestReleases = "https://api.github.com/repos/sakai135/wsl-vpnkit/releases/latest"
+$githubLatestReleasesHref = (((Invoke-WebRequest $gitHubLatestReleases) | ConvertFrom-Json).assets | where { $_.content_type -eq "application/x-gzip"}).browser_download_url
+iwr $githubLatestReleasesHref -OutFile "$HOME\wsl-vpnkit.tar.gz"
 ```
 2. Install
 ```pwsh
