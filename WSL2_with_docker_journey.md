@@ -78,7 +78,7 @@ sed -i 's/^log_driver.*$/log_driver = "file"/' ~/.config/containers/containers.c
 Create run path
 ```sh
 sudo mkdir /run/podman
-sudo chown $USERNAME /run/podman
+sudo chown $USER /run/podman
 ```
 
 verify podman
@@ -103,5 +103,20 @@ sudo ssh-keygen -f /etc/ssh/ssh_host_ed25519_key -N '' -t ed25519
 # start ssh server
 openssh-server -D&
 ```
-## configure windows podman
 
+Generate key to be used by podman windows client
+```sh
+WINDOWS_HOME="/mnt/c/Users/USERNAME/"
+ssh-keygen -b 2048 -t ed25519 -f $WINDOWS_HOME/.ssh/id_ed25519_localhost -q -N ""
+cat $WINDOWS_HOME/.ssh/id_ed25519_localhost.pub >> ~/.ssh/authorized_keys
+```
+
+## configure windows podman
+```pwsh
+podman system connection add --identity $HOME\.ssh\id_ed25519_localhost wsl ssh://USERNAME@localhost/run/podman/podman.sock
+```
+
+Test podman connectivity from windows
+```pwsh
+podman info
+```
