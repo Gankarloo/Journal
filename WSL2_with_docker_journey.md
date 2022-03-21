@@ -72,7 +72,7 @@ sed -i 's/#^cgroup_manager.*$/cgroup_manager = "cgroupfs"/' ~/.config/containers
 # change events_logger to file (not journald)
 sed -i 's/^#events_logger.*$' ~/.config/containers/containers.conf
 # change log_driver  to k8s-file (not journald)
-sed -i 's/^log_driver.*$/log_driver = "file"/' ~/.config/containers/containers.conf
+sed -i 's/^log_driver.*$/log_driver = "k8s-file"/' ~/.config/containers/containers.conf
 ```
 
 Create run path
