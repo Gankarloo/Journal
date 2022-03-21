@@ -85,10 +85,14 @@ verify podman
 ```sh
 podman run -it docker.io/library/alpine:latest
 podman run --rm -it hello-world
-
+```
 Start podman socket
 ```sh
 podman system service --time=0 unix:///run/podman/podman.sock&
+```
+**Start podman tcp instead**
+```sh
+podman system service --time=0 tcp:localhost:2375
 ```
 
 ## install ssh server
@@ -120,3 +124,11 @@ Test podman connectivity from windows
 ```pwsh
 podman info
 ```
+## run docker client on windows
+Download docker cli
+```pwsh
+https://github.com/StefanScherer/docker-cli-builder/releases
+
+put it in your PATH
+```
+
