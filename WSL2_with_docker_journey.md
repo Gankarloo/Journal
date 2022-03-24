@@ -50,6 +50,18 @@ note. the msi exited silently and it took a while before the installation were c
 check $programfiles/redhat
 
 ## install podman in wsl
+
+### Make sure /tmp is cleared on reboot
+Add this to your .bashrc
+```sh
+# Mount /tmp as tmpfs
+if [ mount | grep -q -E "^[^ ]* on /tmp " ]
+then
+        echo "Mounting tmp as tmpfs"
+        sudo mount -t tmpfs tmpfs /tmp -o noexec,defaults,nodev,nosuid,noatime,size=256m
+fi
+```
+
 ### Fedora 
 Latest podman is in the 4.0 and has breaking changes compared to v3. 
 For Fedora 35 enable a copr repo.
